@@ -23,15 +23,10 @@ client = tweepy.Client(
     access_token_secret=ACCESS_SECRET,
 )
 
-
-def make_post():
-    timezone = get_timezone()
-    new_post = create_post(timezone)
-    print(f"Posting: {new_post}")
-    client.create_tweet(text=new_post)
-
-
 if __name__ == "__main__":
     delay = random.randint(0, 1800)  # Random delay (0-30 minutes)
+    timezone = get_timezone()
+    new_post = create_post(timezone)
+    print(f"Posting: {new_post}\nDelay: {delay}s")
     time.sleep(delay)
-    make_post()
+    client.create_tweet(text=new_post)
