@@ -13,7 +13,9 @@ class TestTimezone(unittest.TestCase):
         fixed_time = datetime(2023, 10, 26, 15, 0, 0, tzinfo=pytz.utc)
         mock_datetime.now.return_value = fixed_time
 
-        timezone = get_timezone()
+        with patch("pytz.timezone") as mock_timezone:
+            mock_timezone.return_value.tzname.return_value = "EDT"  
+            timezone = get_timezone()
 
         self.assertIsNotNone(timezone)
 
@@ -26,6 +28,6 @@ class TestTimezone(unittest.TestCase):
 
         self.assertEqual(timezone, "America/New_York")
 
-
 if __name__ == "__main__":
     unittest.main()
+

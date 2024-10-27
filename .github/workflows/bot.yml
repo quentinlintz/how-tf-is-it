@@ -1,12 +1,10 @@
-name: Scheduled X Bot
+name: Run bot
 
 on:
-  schedule:
-    - cron: "0 */4 * * *"
   workflow_dispatch:
 
 jobs:
-  run-twitter-bot:
+  bot:
     runs-on: ubuntu-latest
 
     env:
@@ -15,6 +13,7 @@ jobs:
       ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       ACCESS_SECRET: ${{ secrets.ACCESS_SECRET }}
       BEARER_TOKEN: ${{ secrets.BEARER_TOKEN }}
+      DEBUG: 0
 
     steps:
       - name: Check out the code

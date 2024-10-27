@@ -3,6 +3,32 @@ from datetime import datetime
 
 import pytz
 
+# A set of common timezone abbreviations
+VALID_TZ_ABBREVIATIONS = {
+    "UTC",
+    "GMT",
+    "EST",
+    "EDT",
+    "CST",
+    "CDT",
+    "MST",
+    "MDT",
+    "PST",
+    "PDT",
+    "AST",
+    "ADT",
+    "HST",
+    "AKST",
+    "AKDT",
+    "NST",
+    "NDT",
+    "IST",
+    "CET",
+    "CEST",
+    "EET",
+    "EEST",
+}
+
 
 def get_timezone():
     timezones = pytz.all_timezones
@@ -12,8 +38,7 @@ def get_timezone():
     for tz in timezones:
         local_time = datetime.now(pytz.timezone(tz))
         if 14 <= local_time.hour <= 22:
-            valid_timezones.append(tz)
-
-    valid_timezones = [tz for tz in valid_timezones if tz.count("/") <= 1]
+            if local_time.tzname() in VALID_TZ_ABBREVIATIONS:
+                valid_timezones.append(tz)
 
     return random.choice(valid_timezones) if valid_timezones else "America/New_York"
