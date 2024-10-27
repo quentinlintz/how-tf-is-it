@@ -13,7 +13,6 @@ jobs:
       ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       ACCESS_SECRET: ${{ secrets.ACCESS_SECRET }}
       BEARER_TOKEN: ${{ secrets.BEARER_TOKEN }}
-      DEBUG: 0
 
     steps:
       - name: Check out the code
